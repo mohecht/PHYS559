@@ -9,9 +9,9 @@
 IB1 0 12 BEHAVIORAL PWL(0s 0A 0.5ns 300uA 1.5ns 300uA 4.5ns 0A 5ns 0A)
 
 * Rest of your components (unchanged)
-JJ1 14 N5 20 jj0 area=1
-JJ2 N6 15 N2 jj0 area=1
-JJ3 7 17 INPUT jj1 area=1
+JJ1 14 N5 20 jj0 
+JJ2 N6 15 N2 jj0 
+JJ3 7 17 INPUT jj1
 LJ11 N4 14 0.058pH
 LJ12 19 N4 0.945pH
 LJ13 13 N4 0.355pH
