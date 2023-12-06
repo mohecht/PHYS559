@@ -3,13 +3,12 @@
 
 
 * define josephson models
-.model jj0 jj(rtype=0, icrit = 225uA, cap=60fF)
-.model jj1 jj(rtype=0,icrit = 250uA,cap = 60fF)
+.model jj0 jj(level=1, icrit = 225uA)
+.model jj1 jj(level=1, icrit = 250uA)
 * Behavioral current source for square wave generation
 IB1 0 12 BEHAVIORAL PWL(0s 0A 0.5ns 300uA 1.5ns 300uA 4.5ns 0A 5ns 0A)
 
 * Rest of your components (unchanged)
-I0 0 12 3uA
 JJ1 14 N5 20 jj0 area=1
 JJ2 N6 15 N2 jj0 area=1
 JJ3 7 17 INPUT jj1 area=1
