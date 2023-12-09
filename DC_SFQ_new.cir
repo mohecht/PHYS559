@@ -1,0 +1,67 @@
+* DC_SFQ converter
+**  C:\Users\malid\DC_SFQ_new.cir
+
+.model jj1 jj(level=1)
+
+.control
+run
+plot .
+.endc
+
+
+B1 3 12 100 jj1 ics=225uA
+B2 4 13 100 jj1 ics=225uA
+B3 5 15 100 jj1 ics=250uA
+LJ11 12 2 0.58pH
+LJ12 17 2 0.945pH
+LJ13 11 2 .0355pH
+LJ21 13 6 0.05pH
+LJ22 14 6 0.955pH
+LJ23 6 0 0.096pH
+LJ31 15 7 0.028pH
+LJ32 16 7 0.961pH
+LJ33 7 0 1.103pH
+LQ1 10 11 1.071pH
+LQ2 11 0 3.927pH
+LQ3 3 4 0.913pH
+LQ4 4 5 4.399pH
+LQ5 5 0 1.09pH
+LV1 8 3 16.8pH
+LV2 9 5 15.5pH
+RJ1 3 17 0.766
+RJ2 4 14 0.766
+RJ3 5 16 0.688
+RV1 1 8 9.09
+RV2 1 9 14.29
+
+
+** Vary voltage pulse
+*I0 0 10 pulse(0 300uA 5.0ps .015ps .02ps  50ps)+pulse(0 300uA 100.0ps .015ps .02ps  50ps)+pulse(0 300uA 200ps .015ps .02ps  50ps)+pulse(0 300uA 300ps .015ps .02ps  50ps)+pulse(0 300uA 400ps .015ps .02ps  50ps)
+*VQ 1 0  pulse(0 2.5mV 5.0ps .015ps .02ps  50ps)+pulse(0 2.5mV 99.9ps .015ps .02ps  51ps)+pulse(0 2.5mV 200ps .015ps .02ps  60ps)+pulse(0 2.5mV 300ps .015ps .02ps  40ps)+pulse(0 2.5mV 399.9ps .015ps .02ps  10ps)+pulse(0 2.5mV 448ps .015ps .02ps  10ps)
+
+** Changing Current Rise/Fall Times; ASymmetric
+*I0 0 10 pulse(0 300uA 5.0ps  .02ps .015ps 50ps)+pulse(0 300uA 100ps .025ps  .015ps  50ps)+pulse(0 300uA 200ps .03ps .015ps  50ps)+pulse(0 300uA 300ps  .055ps .015ps 50ps)+pulse(0 300uA 400ps  .06ps .015ps 50ps)+pulse(0 300uA 500ps .105ps .015ps  50ps)
+*VQ 1 0  pulse(0 2.5mV 4.9ps .015ps .015ps  10ps)+pulse(0 2.5mV 53ps .02ps .02ps 10ps)+pulse(0 2.5mV 99.9ps .015ps .015ps  10ps)+pulse(0 2.5mV 148ps 0.02ps 0.02ps 10ps)+ pulse(0 2.5mV 199.9ps .015ps .015ps  10ps)+pulse(0 2.5mV 248ps 0.02ps 0.02ps 10ps)+ pulse(0 2.5mV 299.9ps .015ps .015ps  10ps)+pulse(0 2.5mV 348ps 0.02ps 0.02ps 10ps)+ pulse(0 2.5mV 399.9ps .015ps .015ps  10ps)+pulse(0 2.5mV 448ps 0.02ps 0.02ps 10ps)+ pulse(0 2.5mV 499.9ps .015ps .015ps  10ps)+pulse(0 2.5mV 548ps 0.02ps 0.02ps 10ps)
+ 
+
+** Vary Pulse Length
+*I0 0 10 pulse(0 300uA 5.0ps .015ps .02ps  10ps)+ pulse(0 300uA 50ps .015ps .02ps  50ps)+pulse(0 300uA 150ps .015ps .02ps  100ps)+pulse(0 300uA 300ps .015ps .02ps  200ps)+pulse(0 300uA 550ps .015ps .02ps  250ps)+pulse(0 300uA 850ps .015ps .02ps  300ps)
+*VQ 1 0  pulse(0 2.5mV 4.9ps .015ps .015ps  8ps)+pulse(0 2.5mV 14ps .02ps .02ps 8ps)+pulse(0 2.5mV 49.9ps .015ps .015ps  10ps)+pulse(0 2.5mV 99ps 0.02ps 0.02ps 10ps)+ pulse(0 2.5mV 149.9ps .015ps .015ps  10ps)+pulse(0 2.5mV 249ps 0.02ps 0.02ps 10ps)+ pulse(0 2.5mV 299.9ps .015ps .015ps  10ps)+pulse(0 2.5mV 499ps 0.02ps 0.02ps 10ps)+ pulse(0 2.5mV 549.9ps .015ps .015ps  10ps)+pulse(0 2.5mV 799ps 0.02ps 0.02ps 10ps)+ pulse(0 2.5mV 849.9ps .015ps .015ps  10ps)+pulse(0 2.5mV 1149ps 0.02ps 0.02ps 10ps)
+
+
+* Vary Amplitudes
+*I0 0 10 pulse(0 250uA 5.0ps .015ps .02ps  20ps)+pulse(0 300uA 100ps .015ps .02ps  20ps)+ pulse(0 350uA 200ps .015ps .02ps  20ps)+ pulse(0 400uA 300ps .015ps .02ps  20ps)
+*VQ 1 0  pulse(0 2.5mV 4.9ps .015ps .025ps  8ps)+pulse(0 2.5mV 23ps .015ps .025ps 8ps)+ pulse(0 2.5mV 99.9ps .015ps .025ps  8ps)+pulse(0 2.5mV 118ps .015ps .025ps 8ps)+pulse(0 2.5mV 199.9ps .015ps .025ps  8ps)+pulse(0 2.5mV 218ps .015ps .025ps 8ps)+pulse(0 2.5mV 299.9ps .015ps .025ps  8ps)+pulse(0 2.5mV 318ps .015ps .025ps 8ps)
+
+* Ideal Pulse
+I0 0 10 pulse(0 300uA 5.0ps  .01ps .105ps 25ps)
+VQ 1 0  pulse(0 2.5mV 4.9ps .015ps .015ps  10ps)+pulse(0 2.5mV 28ps .02ps .02ps 10ps)
+
+.tran .001p 55ps uic
+.plot tran @I0[c] v(1) v(5) 
+
+
+.save @I0[c]
+.save v(5)
+.save v(1)
+** C:\Users\malid\DC_SFQ_new.cir
